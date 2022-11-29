@@ -12,22 +12,30 @@ class Funcionario(
     var salario: Double
 ) {
 
+    private val currencyFormatter = NumberFormat.getCurrencyInstance(Locale.forLanguageTag("pt-BR"))
+
     init {
-        // Bloco inicial a ser rodado...
         // (executado em primeiro)
         nome = nome.uppercase(Locale.getDefault())
         sobrenome = sobrenome.uppercase(Locale.getDefault())
     }
 
-    constructor(nome: String, sobrenome: String, cpf: String) : this(0, nome = nome, sobrenome = sobrenome, cpf = cpf, "Desconhecido", 0.0) {
+    constructor(nome: String, sobrenome: String, cpf: String) : this(
+        -1,
+        nome = nome,
+        sobrenome = sobrenome,
+        cpf = cpf,
+        "Desconhecido",
+        0.0
+    ) {
         // (executado em segundo)
         this.nome = nome.lowercase(Locale.getDefault())
         this.sobrenome = sobrenome.lowercase(Locale.getDefault())
     }
 
-    fun redefinirCargo(novoCargo: String, salario: Double) {
+    fun redefinirCargo(novoCargo: String, novoSalario: Double) {
         this.cargo = novoCargo
-        this.salario = salario * when(novoCargo) {
+        this.salario = novoSalario * when (novoCargo) {
             "Gerente" -> 1.2
             "Vendedor" -> 1.1
             "Diretor" -> 1.5
@@ -35,17 +43,14 @@ class Funcionario(
         }
     }
 
-    override fun toString(): String {
-        val currencyFormatter = NumberFormat.getCurrencyInstance(Locale.forLanguageTag("pt-BR"))
-
-        return """
+    override fun toString(): String =
+         """
             Nome: $nome
             Sobrenome: $sobrenome
             CPF: $cpf
             Cargo: $cargo
             Salário: ${currencyFormatter.format(salario)}
         """.trimIndent()
-    }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -70,31 +75,31 @@ class Funcionario(
 fun main() {
 
     val joaoZelador = Funcionario(
-        0,
-        "Joao",
-        "Silva",
-        "123456789",
-        "Zelador",
-        1_000.0
+        id = 0,
+        nome = "João",
+        sobrenome = "Silva",
+        cpf = "123456789",
+        cargo = "Zelador",
+        salario = 1_000.0
     )
 
     val joseVendedor = Funcionario(
-        1,
-        "José",
-        "Silva",
-        "123456789",
-        "Vendedor",
-        1_300.0
+        id = 1,
+        nome = "José",
+        sobrenome = "Silva",
+        cpf = "123456789",
+        cargo = "Vendedor",
+        salario = 1_300.0
     )
 
     val mariaVendedora = Funcionario(
-        "Maria",
-        "Ferreira",
-        "01293012931"
+        nome = "Maria",
+        sobrenome = "Ferreira",
+        cpf = "01293012931"
     )
 
-    // Possuem o mesmo cpf
     joaoZelador.redefinirCargo("Gerente", 10_000.0)
+    println("Novo salário de João: ${joaoZelador.salario}")
 
     // Possuem o mesmo cpf
     println(joaoZelador.hashCode())
