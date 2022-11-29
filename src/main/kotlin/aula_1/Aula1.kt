@@ -43,6 +43,8 @@ class Funcionario(
         }
     }
 
+    fun buscaTextoSalarioMonetario(): String = currencyFormatter.format(salario)
+
     override fun toString(): String =
          """
             Nome: $nome
@@ -99,11 +101,15 @@ fun main() {
     )
 
     joaoZelador.redefinirCargo("Gerente", 10_000.0)
-    println("Novo salário de João: ${joaoZelador.salario}")
+    println("Novo salário de João [${joaoZelador.cargo}]: ${joaoZelador.buscaTextoSalarioMonetario()}")
+
+    println()
 
     // Possuem o mesmo cpf
     println(joaoZelador.hashCode())
     println(joseVendedor.hashCode())
+
+    println()
 
     // toString()
     println(mariaVendedora.toString())
