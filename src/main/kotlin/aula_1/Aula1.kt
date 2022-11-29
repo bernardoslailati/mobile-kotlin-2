@@ -3,7 +3,7 @@ package aula_1
 import java.text.NumberFormat
 import java.util.*
 
-class Funcionario(
+class Funcionario constructor(
     val id: Int,
     var nome: String,
     var sobrenome: String,
