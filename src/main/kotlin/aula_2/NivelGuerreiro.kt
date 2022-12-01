@@ -1,6 +1,11 @@
 package aula_2
 
 // Exemplo: Enum
+//
+// O que possui de diferente de uma classe convencional?
+//      (*) os objetos criados internamente a essa classe terão os atributos 'ordinal: Int' e 'name: String';
+//      (**) o único método a ser sobrescrito é o .toString() (por padrão retorna o atributo 'name' (nome do objeto definido);
+//      (***) pode receber métodos abstratos (que obrigatoriamente deverão ser implementados por todos os objetos).
 enum class NivelGuerreiro(val nome: String, val arma: Arma) {
     SOLDADO(nome = "Soldado", arma = Arma(nome = "Pistola", dano = 4)) {
         override fun superDano(): Int {

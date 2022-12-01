@@ -1,6 +1,9 @@
 package aula_2
 
-// Exemplo: Getters e Setters
+// Exemplo: Getters e Setters Personalizados
+//
+// get() = obter valor do atributo
+// set(value) = inserir valor no atributo
 class Retangulo(val comprimento: Double, larguraInicial: Double) {
 
     var largura: Double = larguraInicial
@@ -11,10 +14,11 @@ class Retangulo(val comprimento: Double, larguraInicial: Double) {
     val area: Double
         get() = comprimento * largura
 
-    fun calculaVolume() {
-        // larguraInicial, não pode utilizar aqui dentro! Apenas existe no formato de parâmetro dentro do escopo da função constructor (primário)
-        largura
-        // ...
+    fun calculaVolume(altura: Double): Double {
+        return largura * comprimento * altura
+
+        // Obs: larguraInicial, não pode utilizar aqui dentro! Apenas existe no formato de parâmetro, no escopo da
+        // função constructor (primário)
     }
 
 }

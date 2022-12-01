@@ -1,5 +1,7 @@
 package aula_2
 
+// Relembrando os conceitos vistos na aula 01...
+//
 // Enunciado: Desenvolva um sistema que possibilite o usuário criar uma EMPRESA (nome, cnpj, segmento, ...)
 // e inserir, modificar, remover e mostrar FUNCIONÁRIOS (id, nome, sobrenome, cargo, salário, ...).
 

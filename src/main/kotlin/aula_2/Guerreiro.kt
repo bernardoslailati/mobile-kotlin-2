@@ -1,7 +1,13 @@
 package aula_2
 
-// Exemplo: Data Class (possuem .toString() personalizado, os objetos possuem
-// por padrão o método.copy()
+// Exemplo: Data Class
+//
+// O que possui de diferente de uma classe convencional?
+//      (*) .toString() personalizado, para apresentar com clareza os valores dos atributos do objeto;
+//      (**) Objetos dessa classe irão possuir por padrão o método.copy(), que possibilita criar um novo objeto com
+//          todos os campos copiados de um primeiro objeto;
+//      (***) .equals() e .hasCode() personalizados, se dois objetos tiverem todos os atributos com valores iguais,
+//          a resposta será true (são iguais) para o .equals() e terão o mesmo valor de código hash.
 data class Guerreiro(
     val nome: String,
     var vida: Int = 20,
