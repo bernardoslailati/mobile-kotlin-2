@@ -4,8 +4,8 @@ package aula_2
 //
 // O que possui de diferente de uma classe convencional?
 //      (*) os objetos criados internamente a essa classe terão os atributos 'ordinal: Int' e 'name: String';
-//      (**) o único método a ser sobrescrito é o .toString() (por padrão retorna o atributo 'name' (nome do objeto definido);
-//      (***) pode receber métodos abstratos (que obrigatoriamente deverão ser implementados por todos os objetos).
+//      (**) o único método a ser sobrescrito é o .toString() (por padrão retorna o atributo 'name' - nome do objeto definido);
+//      (***) pode receber métodos abstratos (que deverão obrigatoriamente ser implementados por todos os objetos).
 enum class NivelGuerreiro(val nome: String, val arma: Arma) {
     SOLDADO(nome = "Soldado", arma = Arma(nome = "Pistola", dano = 4)) {
         override fun superDano(): Int {
@@ -14,12 +14,12 @@ enum class NivelGuerreiro(val nome: String, val arma: Arma) {
     },
     GUARDA(nome = "Guarda", arma = Arma(nome = "Escopeta", dano = 10)) {
         override fun superDano(): Int {
-            return arma.dano * 1
+            return arma.dano * 2
         }
     },
     GENERAL(nome = "General", arma = Arma(nome = "Fuzil", dano = 14)) {
         override fun superDano(): Int {
-            return arma.dano * 2
+            return arma.dano * 3
         }
     },
     CELESTIAL(nome = "Celestial", arma = Arma(nome = "Espada Celestial", dano = 30)) {
@@ -39,14 +39,18 @@ enum class NivelGuerreiro(val nome: String, val arma: Arma) {
     };
 
     override fun toString(): String {
-        return "NivelGuerreiro(nome=$nome, arma=$arma)"
+        return "NivelGuerreiro(nome= $nome, arma=$arma)"
     }
 
     abstract fun superDano(): Int
 
 }
 
-data class Arma(val nome: String, val dano: Int)
+data class Arma(val nome: String, val dano: Int) {
+    override fun toString(): String {
+        return "⚔ $nome | \uD83D\uDCA5 $dano"
+    }
+}
 
 fun main() {
 
