@@ -4,6 +4,9 @@ import aula_2.Arma
 
 object Chefao {
 
+    // Esse valor irá multiplicar o dano do golpe.
+    // Modo FACIL = 1 | INTERMEDIARIO = 2 | DIFICIL = 3
+    // Ex: o usuário alterou o nível do jogo para intermediario => Chefao.multiplicador = 2
     var multiplicador = 1
 
     val nome: String = "Belzeboss Rarará de Raio Laser"

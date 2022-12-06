@@ -54,11 +54,11 @@ data class Arma(val nome: String, val dano: Int) {
 
 fun main() {
 
-//    println(NivelGuerreiro.SOLDADO.toString())
-//    println(NivelGuerreiro.SOLDADO.name)
-//    println(NivelGuerreiro.SOLDADO.ordinal)
+    println(NivelGuerreiro.SOLDADO)
 
-    println(NivelGuerreiro.SOLDADO.toString())
-//    println(NivelGuerreiro.SOLDADO.arma)
+    println(NivelGuerreiro.SOLDADO.name)
+    println(NivelGuerreiro.SOLDADO.ordinal)
+
+    println(NivelGuerreiro.SOLDADO.arma)
 
 }

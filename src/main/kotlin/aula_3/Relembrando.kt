@@ -3,9 +3,12 @@ package aula_3
 import aula_3.Dia.*
 import aula_3.Materia.*
 
-// Crie uma classe enumerada que represente diferentes tipos de aulas que um professor
+// Relembrando os conceitos vistos na aula 02...
+//
+// Enunciado: Crie uma classe enumerada que represente diferentes tipos de aulas que um professor
 // poderá dar e os dias que ele deverá lecioná-las.
-
+//
+// Bônus: o método .joinToString() usado em listas => transforma listas em strings unificando seus itens, de forma personalizada.
 enum class Dia(val nome: String, val abreviacao: String) {
     DOMINGO(nome = "Domingo", abreviacao = "dom"),
     SEGUNDA(nome = "Segunda", abreviacao = "seg"),

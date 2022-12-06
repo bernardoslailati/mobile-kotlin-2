@@ -10,8 +10,7 @@ package aula_2
 //
 // Além disso, os valores dos PARÂMETROS passados no construtor, também são validados através do bloco init
 // ("Comprimento e largura não podem ser negativos").
-
-class Retangulo2(comprimento: Double, largura: Double) {
+class RetanguloExemplo(comprimento: Double, largura: Double) {
 
     var comprimento: Double = .0
         get() = comprimento

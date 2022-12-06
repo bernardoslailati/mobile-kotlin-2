@@ -4,7 +4,6 @@ package aula_2
 //
 // Enunciado: Desenvolva um sistema que possibilite o usuário criar uma EMPRESA (nome, cnpj, segmento, ...)
 // e inserir, modificar, remover e mostrar FUNCIONÁRIOS (id, nome, sobrenome, cargo, salário, ...).
-
 class Funcionario(val nome: String, val sobrenome: String, var cargo: String, var salario: Double) {
 
     override fun toString(): String {

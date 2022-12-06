@@ -2,6 +2,7 @@ package aula_2
 
 import aula_2.NivelGuerreiro.*
 import aula_3.Chefao
+import kotlin.random.Random
 
 // Exemplo: Data Class
 //
@@ -11,11 +12,31 @@ import aula_3.Chefao
 //          todos os campos copiados de um primeiro objeto;
 //      (***) .equals() e .hasCode() personalizados, se dois objetos tiverem todos os atributos com valores iguais,
 //          a resposta será true (são iguais) para o .equals() e terão o mesmo valor de código hash.
+
+// Uma CASA e ANIMAL DE ESTIMACAO -> internas do Guerreiro
 data class Guerreiro(
     val nome: String,
     var vida: Int = VIDA_INICIAL,
-    var nivel: NivelGuerreiro = NIVEL_INICIAL
+    var nivel: NivelGuerreiro = NIVEL_INICIAL,
+    var casa: Casa? = null
 ) {
+
+    var animalDeEstimacao: AnimalDeEstimacao? = null
+
+    // Nested Class -> será possivelmente acessada de forma externa
+    data class Casa(val tamanho: Int, val recuperacao: Int) {
+        fun descansar() {
+            // Aumentar a vida do guerreiro somando "recuperacao"
+        }
+    }
+
+    // Inner Class -> acessível apenas internamente no escopo do Guerreiro
+    inner class AnimalDeEstimacao(val nome: String, val dano: Int) {
+        private val multiplicadorDeDano = Random.nextInt(1, 2)
+        fun golpear(): Int {
+            return dano * multiplicadorDeDano
+        }
+    }
 
     companion object {
         const val VIDA_INICIAL = 20
@@ -36,7 +57,11 @@ data class Guerreiro(
     }
 
     fun superGolpe(): Int {
-        return nivel.superDano()
+        return nivel.superDano() + (animalDeEstimacao?.dano ?: 0)
+    }
+
+    fun ganhouUmCachorro(animal: AnimalDeEstimacao) {
+        animalDeEstimacao = animal
     }
 
     fun mudaNivel() {
@@ -44,8 +69,14 @@ data class Guerreiro(
         nivel = when(nivel) {
             SOLDADO -> GUARDA
             GUARDA -> GENERAL
-            GENERAL -> CELESTIAL
-            CELESTIAL -> APOCALIPTICO
+            GENERAL -> {
+                animalDeEstimacao = AnimalDeEstimacao(nome = "Unicórnio", dano = 80)
+                CELESTIAL
+            }
+            CELESTIAL -> {
+                animalDeEstimacao = AnimalDeEstimacao(nome = "Dragão Negro de Olhos Vermelhos", dano = 120)
+                APOCALIPTICO
+            }
             APOCALIPTICO -> DEUS_DOS_DEUSES
             else -> {
                 vida /= 2
@@ -64,109 +95,49 @@ class Guerreiro2(
 )
 
 fun main() {
-//
-//    val guerreiro1 = Guerreiro(nome = "Adalberto Guerreiro", nivel = "Soldado")
-//    // Uso do método copy()
-//    val guerreiro2 = guerreiro1.copy()
-//
-//    val guerreiro3 = Guerreiro2(nome = "Adalberto Guerreiro", nivel = "Soldado")
-//    val guerreiro4 = Guerreiro2(nome = "Adalberto Guerreiro", nivel = "Soldado")
-//    // Objetos através de data class
-//    println(guerreiro1.toString())
-//    println(guerreiro2.toString())
-//    println(guerreiro2.equals(guerreiro1))
-//
-//    // Objetos através de class
-//    println(guerreiro3.toString())
-//    println(guerreiro4.toString())
-//    println(guerreiro4.equals(guerreiro3))
-//    val guerreiroJoao = Guerreiro(nome = "João", nivel = "Soldado")
-//    val guerreiroJose = Guerreiro(nome = "José", nivel = "Soldado")
-//
-//    println(Guerreiro.multiplicadorDano)
-//    println(guerreiroJoao.golpeMultiplo())
-//    println(guerreiroJose.golpeMultiplo())
-//
-//    println()
-//
-//    // usuário acabou de comprar o pacote premium de guerreiro
-//    Guerreiro.multiplicadorDano = 2
-//    println(Guerreiro.multiplicadorDano)
-//    println(guerreiroJoao.golpeMultiplo())
-//    println(guerreiroJose.golpeMultiplo())
-//
-//    println()
-//
-//    println(Guerreiro.buscarDescricao())
+    // Criando um objeto do tipo Guerreiro
+    val guerreiro1 = Guerreiro(nome = "Adalberto Guerreiro")
+    // Uso do método copy()
+    val guerreiro2 = guerreiro1.copy()
 
-    val bartolomeuAmigoSeu = Guerreiro(nome = "Bartolomeu Amigo Seu")
-    println(bartolomeuAmigoSeu)
+    val guerreiro3 = Guerreiro2(nome = "Adalberto Guerreiro", nivel = "Soldado")
+    val guerreiro4 = Guerreiro2(nome = "Adalberto Guerreiro", nivel = "Soldado")
+    // Objetos através de data class
+    println(guerreiro1.toString())
+    println(guerreiro2.toString())
+    // A função .equals() (representada por ==)
+    println(guerreiro2 == guerreiro1)
 
-    bartolomeuAmigoSeu.mudaNivel()
-    println(bartolomeuAmigoSeu)
+    // Objetos através de class
+    println(guerreiro3.toString())
+    println(guerreiro4.toString())
+    // A função .equals() (representada por ==)
+    println(guerreiro4 == guerreiro3)
+    val guerreiroJoao = Guerreiro(nome = "João")
+    val guerreiroJose = Guerreiro(nome = "José")
 
-    bartolomeuAmigoSeu.mudaNivel()
-    println(bartolomeuAmigoSeu)
+    println(Guerreiro.multiplicadorDano)
+    println(guerreiroJoao.golpeMultiplo())
+    println(guerreiroJose.golpeMultiplo())
 
-    bartolomeuAmigoSeu.mudaNivel()
-    println(bartolomeuAmigoSeu)
+    println()
 
-    bartolomeuAmigoSeu.mudaNivel()
-    println(bartolomeuAmigoSeu)
+    // Usuário acabou de comprar o pacote premium de guerreiro... seu dano será maior!
+    Guerreiro.multiplicadorDano = 2
+    println(Guerreiro.multiplicadorDano)
+    println(guerreiroJoao.golpeMultiplo())
+    println(guerreiroJose.golpeMultiplo())
 
-    bartolomeuAmigoSeu.mudaNivel()
-    println(bartolomeuAmigoSeu)
+    println()
 
-    bartolomeuAmigoSeu.mudaNivel()
-    println(bartolomeuAmigoSeu)
+    println(Guerreiro.buscarDescricao())
 
-    // bartolomeuAmigoSeu X belzeboss
-    println(Chefao)
-    Chefao.receberDano(bartolomeuAmigoSeu.golpear())
-    println(Chefao)
-    Chefao.receberDano(bartolomeuAmigoSeu.golpeMultiplo())
-    println(Chefao)
-    Chefao.receberDano(bartolomeuAmigoSeu.superGolpe())
-    println(Chefao)
-    Chefao.receberDano(bartolomeuAmigoSeu.golpear())
-    println(Chefao)
-    Chefao.receberDano(bartolomeuAmigoSeu.golpeMultiplo())
-    println(Chefao)
-    Chefao.receberDano(bartolomeuAmigoSeu.superGolpe())
-    println(Chefao)
-    println(Chefao)
-    Chefao.receberDano(bartolomeuAmigoSeu.golpear())
-    println(Chefao)
-    Chefao.receberDano(bartolomeuAmigoSeu.golpeMultiplo())
-    println(Chefao)
-    Chefao.receberDano(bartolomeuAmigoSeu.superGolpe())
-    println(Chefao)
-    println(Chefao)
-    Chefao.receberDano(bartolomeuAmigoSeu.golpear())
-    println(Chefao)
-    Chefao.receberDano(bartolomeuAmigoSeu.golpeMultiplo())
-    println(Chefao)
-    Chefao.receberDano(bartolomeuAmigoSeu.superGolpe())
-    println(Chefao)
-    println(Chefao)
-    Chefao.receberDano(bartolomeuAmigoSeu.golpear())
-    println(Chefao)
-    Chefao.receberDano(bartolomeuAmigoSeu.golpeMultiplo())
-    println(Chefao)
-    Chefao.receberDano(bartolomeuAmigoSeu.superGolpe())
-    println(Chefao)
-    println(Chefao)
-    Chefao.receberDano(bartolomeuAmigoSeu.golpear())
-    println(Chefao)
-    Chefao.receberDano(bartolomeuAmigoSeu.golpeMultiplo())
-    println(Chefao)
-    Chefao.receberDano(bartolomeuAmigoSeu.superGolpe())
-    println(Chefao)
-    println(Chefao)
-    Chefao.receberDano(bartolomeuAmigoSeu.golpear())
-    println(Chefao)
-    Chefao.receberDano(bartolomeuAmigoSeu.golpeMultiplo())
-    println(Chefao)
-    Chefao.receberDano(bartolomeuAmigoSeu.superGolpe())
-    println(Chefao)
+    // Guerreiro ganhou uma casa! Comprou com diamantes (dinheiro)
+
+    val casaPremium = Guerreiro.Casa(tamanho = 100, recuperacao = 200)
+    guerreiroJoao.casa = casaPremium
+
+//    guerreiroJoao.ganhouUmCachorro(Guerreiro.AnimalDeEstimacao()) // ERRO -> não é possível
+//    instanciar um AnimalDeEstimacao fora da classe principal
+
 }
