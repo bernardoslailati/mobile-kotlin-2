@@ -1,5 +1,6 @@
 package aula_4
 
+// Exemplo: Nested e Inner Class, classes aninhadas e internas
 class ClassePrincipal(val teste: Int) {
     var descricao1 = "Classe Principal"
 

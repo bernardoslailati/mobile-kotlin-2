@@ -1,5 +1,6 @@
 package aula_5
 
+// Herança
 open class Veiculo(val capacidade: Int)
 
 open class Terrestre(capacidade: Int, val numeroDeRodas: Int) : Veiculo(capacidade)
@@ -23,7 +24,11 @@ class Carro(
     modelo: String,
     val numPortas: Int,
     val potenciaCv: Int
-) : Automovel(capacidade, 4, cor, placa, modelo) {
+) : Automovel(capacidade, NUM_RODAS, cor, placa, modelo) {
+
+    companion object {
+        private const val NUM_RODAS = 4
+    }
 
     override fun possuiRe(): Boolean = true
 
@@ -34,10 +39,11 @@ class Moto(
     placa: String,
     modelo: String,
     val cilindradas: Int
-) : Automovel(CAPACIDADE, 2, cor, placa, modelo) {
+) : Automovel(CAPACIDADE, NUM_RODAS, cor, placa, modelo) {
 
     companion object {
-        const val CAPACIDADE = 2
+        private const val CAPACIDADE = 2
+        private const val NUM_RODAS = 2
     }
 
 }

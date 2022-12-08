@@ -1,5 +1,6 @@
 package aula_4
 
+// Propriedades e funções de extensão
 data class Nota(val valor: Double, val valorMaximo: Double)
 
 val List<Nota>.mediaPercentual: Double

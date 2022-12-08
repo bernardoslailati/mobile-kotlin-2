@@ -2,6 +2,7 @@ package aula_5
 
 import aula_5.Cargo.VENDEDOR
 
+// Propriedades e funções de extensão
 data class Empresa(val nome: String, val listaFuncionarios: MutableList<Funcionario> = mutableListOf()) {
 
     fun adicionaFuncionario(novoFuncionario: Funcionario) {
@@ -28,9 +29,9 @@ private fun FormularioFuncionario.validaFormulario(): Funcionario? {
     // se pelo menos um campo estiver INVÁLIDO, retorna null
     //
 
-    // 12345678901
-    // cpf válido! funcionario => "123.456.789-01"
-
+    // Utilizando Regex ('regular expression'):
+    // Ex: tem-se a string "12345678901" para o valor cpf do formulário...
+    // O cpf é válido! Então o funcionario receberá a string formatada "123.456.789-01"
     fun formataCpf(): String {
         val padraoEsperado: Regex = "([0-9]{3})([0-9]{3})([0-9]{3})([0-9]{2})".toRegex()
         val padraoFormatado = "$1.$2.$3-$4"

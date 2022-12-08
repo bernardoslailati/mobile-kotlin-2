@@ -3,6 +3,7 @@ package aula_5
 import java.text.NumberFormat
 import java.util.*
 
+// Os modificadores de acesso: public e private
 class ContaBancaria {
 
     private var saldo: Double = 0.0
