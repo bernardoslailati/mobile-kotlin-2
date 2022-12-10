@@ -8,6 +8,7 @@ interface InstrumentoMusical {
 
     fun consertar()
     fun afinar()
+    fun afinar(corda: String)
     fun tocarMusica(musica: String)
 
     fun listaDeAcordes() {
@@ -16,7 +17,14 @@ interface InstrumentoMusical {
 
 }
 
-class Violao(override val material: String) : InstrumentoMusical {
+interface CordasInstrumento {
+    val numeroCordas: Int
+    val materialCordas: String
+
+    fun trocarCordas()
+}
+
+class Violao(override val material: String) : InstrumentoMusical, CordasInstrumento {
 
     override val possuiCordas: Boolean
         get() = true
@@ -29,8 +37,19 @@ class Violao(override val material: String) : InstrumentoMusical {
         println("Regular cordas.")
     }
 
+    override fun afinar(corda: String) {
+        println("Corda $corda afinada!")
+    }
+
     override fun tocarMusica(musica: String) {
         println("Tocando música $musica LÁLÁLÁ...")
+    }
+
+    override val numeroCordas: Int = 6
+    override val materialCordas: String = "Nailon" // ou "Aço"
+
+    override fun trocarCordas() {
+        println("Cordas trocadas com sucesso!")
     }
 
 }
