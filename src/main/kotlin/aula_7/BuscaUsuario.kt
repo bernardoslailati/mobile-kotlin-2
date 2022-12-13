@@ -25,7 +25,7 @@ fun buscaUsuario(): ResultadoBuscaUsuario {
 fun main() {
 
     repeat(6) {
-        buscaUsuario()
+        println(buscaUsuario())
     }
 
 }
