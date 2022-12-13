@@ -1,5 +1,8 @@
 package aula_6
 
+import aula_7.ResultadoBuscaUsuario
+import aula_7.Usuario
+
 abstract class Animal(private val nome: String) {
 
     abstract val numeroPatas: Int
