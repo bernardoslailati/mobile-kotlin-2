@@ -81,7 +81,7 @@ class CarteiraFisica : Carteira(), OperacoesFisicas {
 
 }
 
-class CarteiraDigital() : Carteira(), OperacoesDigitais {
+class CarteiraDigital : Carteira(), OperacoesDigitais {
 
     override fun transferenciaPix(valor: Double) {
         if (saldoSuficiente(valor)) {
@@ -125,7 +125,7 @@ class CarteiraDigital() : Carteira(), OperacoesDigitais {
 
 }
 
-class CarteiraPremium() : Carteira(), OperacoesFisicas, OperacoesDigitais {
+class CarteiraPremium : Carteira(), OperacoesFisicas, OperacoesDigitais {
 
     override fun transferenciaPix(valor: Double) {
         if (saldoSuficiente(valor)) {
